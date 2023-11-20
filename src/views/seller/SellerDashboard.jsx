@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { get_seller_dashboard_index_data } from '../../store/reducers/dashboardIndexReducer'
 import moment from 'moment'
 const SellerDashboard = () => {
-
     const {userInfo} = useSelector(state=>state.auth)
     const { totalSale,
         totalOrder,
