@@ -148,6 +148,7 @@ export const authReducer = createSlice({
             state.successMessage = payload.message
             state.token = payload.token;
             state.role = returnRole(payload.token);
+            state.userInfo = payload.userInfo;
         },
         [seller_login.pending]: (state, _) => {
             state.loader = true
@@ -161,6 +162,7 @@ export const authReducer = createSlice({
             state.successMessage = payload.message
             state.token = payload.token;
             state.role = returnRole(payload.token);
+            state.userInfo = payload.userInfo
         },
         [get_user_info.fulfilled]: (state, { payload }) => {
             state.loader = false;
