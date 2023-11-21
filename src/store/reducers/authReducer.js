@@ -106,27 +106,27 @@ const returnRole = (token) => {
     }
 }
 
-const returnUserInfo = (token) => {
-    if (token) {
-        const decodeToken = jwt(token)
-        const expireTime = new Date(decodeToken.exp * 1000)
-        if (new Date() > expireTime) {
-            localStorage.removeItem('accessToken')
-            return ''
-        } else {
-            return decodeToken.userInfo
-        }
-    } else {
-        return ''
-    }
-}
+// const returnUserInfo = (token) => {
+//     if (token) {
+//         const decodeToken = jwt(token)
+//         const expireTime = new Date(decodeToken.exp * 1000)
+//         if (new Date() > expireTime) {
+//             localStorage.removeItem('accessToken')
+//             return ''
+//         } else {
+//             return decodeToken.userInfo
+//         }
+//     } else {
+//         return ''
+//     }
+// }
 export const authReducer = createSlice({
     name: 'auth',
     initialState: {
         successMessage: '',
         errorMessage: '',
         loader: false,
-        userInfo: returnUserInfo(localStorage.getItem('accessToken')),
+        userInfo: '',
         role: returnRole(localStorage.getItem('accessToken')),
         token: localStorage.getItem('accessToken')
     },
@@ -149,7 +149,6 @@ export const authReducer = createSlice({
             state.successMessage = payload.message;
             state.token = payload.token;
             state.role = returnRole(payload.token);
-            state.userInfo = returnUserInfo(payload.token);
         },
         [seller_register.pending]: (state, _) => {
             state.loader = true
@@ -163,7 +162,6 @@ export const authReducer = createSlice({
             state.successMessage = payload.message
             state.token = payload.token;
             state.role = returnRole(payload.token);
-            state.userInfo = returnUserInfo(payload.token);
         },
         [seller_login.pending]: (state, _) => {
             state.loader = true

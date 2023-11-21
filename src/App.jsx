@@ -15,6 +15,11 @@ function App() {
     setAllRoutes([...allRoutes, routes]);
   }, []);
   
+  useEffect(() => {
+    if(token){
+      dispatch(get_user_info())
+    }
+  }, [token]);
   return <Router allRoutes={allRoutes} />;
 }
 
